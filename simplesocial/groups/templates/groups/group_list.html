@@ -1,0 +1,40 @@
+{% extends 'groups/group_base.html' %}
+
+
+
+{% block group_content %}
+<!-- Blog Post (Right Sidebar) Start -->
+<div class="col-md-9">
+	<div class="col-md-12 page-body">
+		<div class="row">
+			
+			
+			<div class="sub-title">
+				   <h2>Questions</h2>
+				<a href="contact.html"><i class="icon-envelope"></i></a>
+			 </div>
+			
+			
+			<div class="col-md-12 content-page">
+				
+				{% for group in object_list %}
+				<!-- Blog Post Start -->
+				<div class="col-md-12 blog-post">
+					<div class="post-title">
+					  <a href="{% url 'groups:single' slug=group.slug  %}"><h1>{{ group.name }}</h1></a>
+					</div>  
+					<div class="post-info">
+						<span>Number of Members {{ group.members.count }} member{{ group.members.count|pluralize }} <a href="#" target="_blank"></a></span>
+					</div>  
+					<p>{{ group.description_html|safe }}</p>                          			
+					<a href="{% url 'groups:single' slug=group.slug  %}" class="button button-style button-anim fa fa-long-arrow-right"><span>Read More</span></a>
+				</div>
+				<!-- Blog Post End -->
+				{% endfor %}
+			</div>
+		</div>
+
+	</div>
+</div>
+<!-- Blog Post (Right Sidebar) End -->		
+{% endblock %}

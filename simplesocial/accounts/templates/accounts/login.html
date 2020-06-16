@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load bootstrap3 %}
+
+{% block group_content %}
+<div class ="col-md-12 blog-post">
+	<div class="post-title">
+		<h4>Login!</h4>
+	</div>
+		<form method="POST">
+			{% csrf_token %}
+			{% bootstrap_form form %}
+			<input type="submit" name="" class="btn btn-lg bg-color-4" style="color:white
+			" value="Login">
+		</form>
+</div>
+{% endblock %}

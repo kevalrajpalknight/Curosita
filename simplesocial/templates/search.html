@@ -1,0 +1,46 @@
+{% extends 'groups/group_base.html' %}
+{% block title %} - Search {% endblock %}
+{% block group_content %}
+
+	{% if submitbutton == 'Search' and request.GET.q != '' %}
+	{% if results %}
+	{% for group in results %}
+	<!-- Blog Post Start -->
+	<div class="col-md-12 blog-post">
+		<div class="post-title">
+			<a href="{% url 'groups:single' slug=group.slug  %}"><h1>{{ group.name }}</h1></a>
+		</div>  
+		<div class="post-info">
+			<span>Number of Members {{ group.members.count }} member{{ group.members.count|pluralize }} <a href="#" target="_blank"></a></span>
+		</div>  
+		<p>{{ group.description_html|safe }}</p>                          			
+		<a href="{% url 'groups:single' slug=group.slug  %}" class="button button-style button-anim fa fa-long-arrow-right"><span>Read More</span></a>
+	</div>
+	<!-- Blog Post End -->
+	{% endfor %}
+	{% else %}
+	<!-- Blog Post Start -->
+	<div class="col-md-12 blog-post">
+		<div class="post-title">
+			<h1>No Results</h1>
+		</div>
+	</div>
+	{% endif %}
+	{% elif request.GET.q == '' %}
+	{% for group in Group %}
+	<!-- Blog Post Start -->
+	<div class="col-md-12 blog-post">
+		<div class="post-title">
+			<a href="{% url 'groups:single' slug=group.slug  %}"><h1>{{ group.name }}</h1></a>
+		</div>  
+		<div class="post-info">
+			<span>Number of Members {{ group.members.count }} member{{ group.members.count|pluralize }} <a href="#" target="_blank"></a></span>
+		</div>  
+		<p>{{ group.description_html|safe }}</p>                          			
+		<a href="{% url 'groups:single' slug=group.slug  %}" class="button button-style button-anim fa fa-long-arrow-right"><span>Read More</span></a>
+	</div>
+	<!-- Blog Post End -->
+	{% endfor %}
+	{% endif %}
+</div>
+{% endblock %}

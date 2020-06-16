@@ -1,0 +1,42 @@
+{% extends 'groups/group_base.html' %}
+{% block title %} - Home {% endblock %}
+<!-- Blog Post (Right Sidebar) Start -->
+{% block body_title %}
+
+<div class="sub-title">
+        <h2>Questions</h2>
+        <a href="{% url 'groups:create' %}"><i class="icon-plus" title="Create"></i></a>
+</div>
+
+<div class="sub-title">
+        <!-- Search Form Start -->
+        <div class="col-md-8 col-md-offset-2">
+            <form  action="{% url 'search' %}" method="GET" value="{{request.GET.query }}">
+                <div class="subscribe-form margin-top-5">
+                    <input id="mc-email" type="text" placeholder="Looking For" class="text-input" name="query" value="{{ request.GET.query }}">
+                    <input class="submit-btn" type="submit" name="submit"  value="Search">  
+                </div>
+            </form>  
+        </div>
+        <!-- Search Form End -->    
+</div>
+{% endblock %}
+
+{% block group_content %}
+<div class="col-md-12 content-page">
+    {% for group in object_list %}
+    <!-- Blog Post Start -->
+    <div class="col-md-12 blog-post">
+        <div class="post-title">
+            <a href="{% url 'groups:single' slug=group.slug  %}"><h1>{{ group.name }}</h1></a>
+        </div>  
+        <div class="post-info">
+            <span>Number of Members {{ group.members.count }} member{{ group.members.count|pluralize }} <a href="#" target="_blank"></a></span>    
+        </div>                        			
+        <p>{{ group.description }}</p>
+        <a href="{% url 'groups:single' slug=group.slug  %}" class="button button-style button-anim fa fa-long-arrow-right"><span>Read More</span></a>
+    </div>
+    <!-- Blog Post End -->
+    {% endfor %}
+</div>
+{% endblock %}
